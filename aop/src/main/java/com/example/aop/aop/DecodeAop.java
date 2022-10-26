@@ -10,7 +10,7 @@ import java.util.Base64;
 
 @Aspect
 @Component
-public class DecodeAop {
+public class  DecodeAop {
 
     @Pointcut("execution(* com.example.aop.controller..*.*(..))")
     private void cut() {
