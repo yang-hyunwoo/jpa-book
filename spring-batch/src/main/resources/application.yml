@@ -1,16 +1,22 @@
-
 spring:
+  main:
+    allow-bean-definition-overriding: true
   datasource:
-    url: jdbc:mysql://localhost:3307/batch_test
+    url: jdbc:mysql://localhost:3307/batch_test?rewriteBatchedStatements=true
     username: gusdn
     password: thisisTEST!@#
-    driver-class-name: com.mysql.cj.jdbc.Driver
   batch:
     job:
       names: ${job.name:NONE}
+    jdbc:
+      initialize-schema: never
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+
 
 server:
   port: 8081
-
 ---
 
