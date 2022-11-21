@@ -2,9 +2,14 @@ spring:
   main:
     allow-bean-definition-overriding: true
   datasource:
-    url: jdbc:mysql://localhost:3307/batch_test?rewriteBatchedStatements=true
-    username: gusdn
-    password: thisisTEST!@#
+    url: jdbc:postgresql://localhost:5432/boardsite?rewriteBatchedStatements=true
+    username: postgres
+    password: dkahffk11
+    driver-class-name: org.postgresql.Driver
+
+#    url: jdbc:mysql://localhost:3307/batch_test?rewriteBatchedStatements=true
+#    username: gusdn
+#    password: thisisTEST!@#
   batch:
     job:
       names: ${job.name:NONE}
@@ -12,7 +17,7 @@ spring:
       initialize-schema: never
   jpa:
     hibernate:
-      ddl-auto: update
+      ddl-auto: none
     show-sql: true
 
 
