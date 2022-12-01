@@ -32,17 +32,68 @@ public class JpaMain {
 //            em.persist(member);
 
             //준영속 상태
-
-            Member member = new Member();
-            member.setUsername("A");
-            System.out.println("===============");
-            em.persist(member);
-            System.out.println("===============");
             /* update */
 //            Member findMember = em.find(Member.class, 1L);
 //            findMember.setName("HelloC");
 
 //            em.remove(findMember); deleted
+
+//            Team team = new Team();
+//            team.setName("TeamA");
+//            em.persist(team);
+//
+//            Member member = new Member();
+//            member.setUsername("member1");
+//            member.setTeam(team);
+//            em.persist(member);
+//
+//            em.flush();
+//            em.clear();
+//            Member findMember = em.find(Member.class, member.getId());
+//            Team findTeam = findMember.getTeam();
+//            System.out.println("findTeam = " + findTeam.getName());
+//
+//            Team newTeam = em.find(Team.class, 100L);
+//            findMember.setTeam(newTeam);
+
+//            Team team = new Team();
+//            team.setName("TeamA");
+//            em.persist(team);
+//
+//            Member member = new Member();
+//            member.setUsername("member1");
+//            member.setTeam(team);
+//            em.persist(member);
+//
+//            em.flush();
+//            em.clear();
+//            Member findMember = em.find(Member.class, member.getId());
+//            List<Member> members = findMember.getTeam().getMembers();
+//
+//            for(Member m : members) {
+//                System.out.println("m = "+ m.getUsername() );
+//            }
+
+
+            Team team = new Team();
+            team.setName("TeamA");
+            em.persist(team);
+
+            Member member = new Member();
+            member.setUsername("member1");
+//            member.changeTeam(team);
+            em.persist(member);
+
+            team.addMember(member);
+            em.flush();
+            em.clear();
+
+            Team findTeam = em.find(Team.class, team.getId());
+            List<Member> members = findTeam.getMembers();
+
+            for(Member m : members) {
+                System.out.println("m = " + m.getUsername());
+            }
 
             tx.commit();
         } catch (Exception e){
