@@ -6,7 +6,7 @@ import java.time.LocalDateTime;
 import java.util.Date;
 
 @Entity
-public class Member {
+public class Member  extends BaseEntity{
 
     @Id
     @GeneratedValue
@@ -20,8 +20,10 @@ public class Member {
 //    private Long teamId;
 
     @ManyToOne
-    @JoinColumn(name = "TEAM_ID") //읽기 기능만 되고 mappedBy에 team ->Member team이 주인이 된다. ~toOne 쪽이 무조건 주인이 된다.
+    @JoinColumn(name = "TEAM_ID" , insertable = false , updatable = false) //읽기 기능만 되고 mappedBy에 team ->Member team이 주인이 된다. ~toOne 쪽이 무조건 주인이 된다.
     private Team team;
+
+
 
     public Long getId() {
         return id;
@@ -51,4 +53,6 @@ public class Member {
 //        this.team = team;
 //        team.getMembers().add(this);
 //    }
+
+
 }
