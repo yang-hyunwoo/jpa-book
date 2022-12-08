@@ -11,18 +11,18 @@ public class Order extends BaseEntity{
 
     @Id
     @GeneratedValue
-    @Column(name ="ORDER_ID")
+    @Column(name = "ORDER_ID")
     private Long id;
 
-    @ManyToOne
-    @JoinColumn(name="MEMBER_ID")
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "MEMBER_ID")
     private Member member;
 
-    @OneToOne
-    @JoinColumn(name="DELIVERY_ID")
+    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinColumn(name = "DELIVERY_ID")
     private Delivery delivery;
 
-    @OneToMany(mappedBy = "order")
+    @OneToMany(mappedBy = "order", cascade = CascadeType.ALL)
     private List<OrderItem> orderItems = new ArrayList<>();
 
     private LocalDateTime orderDate;

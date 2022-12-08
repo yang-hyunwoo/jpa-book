@@ -8,6 +8,7 @@ import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Set;
 
 public class JpaMain {
 
@@ -138,12 +139,12 @@ public class JpaMain {
 //            logic(m1 , m2);
 //            System.out.println("m1 == m2 " +  );
 
-            Member member1 = new Member();
-            member1.setUsername("hello1");
-            em.persist(member1);
-
-            em.flush();
-            em.clear();
+//            Member member1 = new Member();
+//            member1.setUsername("hello1");
+//            em.persist(member1);
+//
+//            em.flush();
+//            em.clear();
 
 //            Member reference = em.getReference(Member.class, member1.getId());
 //            System.out.println("reference = " + reference.getClass());
@@ -153,10 +154,57 @@ public class JpaMain {
 //
 //            System.out.println("a == a: " + (m1 == reference));
 
-            Member refMember = em.getReference(Member.class, member1.getId());
-            System.out.println("reference = " + refMember.getClass());
-            Hibernate.initialize(refMember); //강제 초기화
-            System.out.println("isLoaded = " + emf.getPersistenceUnitUtil().isLoaded(refMember));
+//            Member refMember = em.getReference(Member.class, member1.getId());
+//            System.out.println("reference = " + refMember.getClass());
+//            Hibernate.initialize(refMember); //강제 초기화
+//            System.out.println("isLoaded = " + emf.getPersistenceUnitUtil().isLoaded(refMember));
+
+//            Team team = new Team();
+//            team.setName("teamA");
+//            em.persist(team);
+//
+//            Member member1 = new Member();
+//            member1.setUsername("hello1");
+//            member1.setTeam(team);
+//
+//            em.persist(member1);
+//
+//
+//            em.flush();
+//            em.clear();
+//
+//
+//            Member member = em.find(Member.class, member1.getId());
+//            System.out.println(member.getTeam().getClass());
+//
+//            System.out.println("==========");
+//            System.out.println("teaName = "+ member.getTeam().getName());
+//            System.out.println("=========");
+
+//            Team team = new Team();
+//            team.setName("teamA");
+//            em.persist(team);
+//
+//            Team teamB = new Team();
+//            teamB.setName("teamB");
+//            em.persist(teamB);
+//
+//            Member member1 = new Member();
+//            member1.setUsername("hello1");
+//            member1.setTeam(team);
+//            em.persist(member1);
+//
+//            Member member2 = new Member();
+//            member2.setUsername("hello1");
+//            member2.setTeam(teamB);
+//            em.persist(member2);
+//
+//            em.flush();
+//            em.clear();
+//
+//            List<Member> members = em.createQuery("select m from Member m", Member.class)
+//                    .getResultList();
+
 
 
 //            Member findMember = em.find(Member.class, 1L);
@@ -169,6 +217,57 @@ public class JpaMain {
 //            printMember(member);
 //            printMemberAndTeam(member);
 
+
+//            Child child1 = new Child();
+//            Child child2 = new Child();
+//            Parent parent = new Parent();
+//
+//            parent.addChild(child1);
+//            parent.addChild(child2);
+//
+//            em.persist(parent);
+//
+//            em.flush();
+//            em.clear();
+//
+//            Parent findParent = em.find(Parent.class, parent.getId());
+//            findParent.getChildList().remove(0);
+
+//            Address homeAddress = new Address("city", "street", "10");
+//
+//            Member member = new Member();
+//            member.setUsername("member1");
+//            member.setHomeAddress(homeAddress);
+//            em.persist(member);
+//
+//            Address newAddress = new Address("NewCity", homeAddress.getStreet(), homeAddress.getZipcode());
+//            member.setHomeAddress(newAddress);
+
+            Member member = new Member();
+            member.setUsername("member1");
+            member.setHomeAddress(new Address("homeCity","street","10000"));
+
+            member.getFavoriteFoods().add("치킨");
+            member.getFavoriteFoods().add("족발");
+            member.getFavoriteFoods().add("피자");
+
+            member.getAddressHistory().add(new Address("old1", "street", "10000"));
+            member.getAddressHistory().add(new Address("old2", "street", "10000"));
+
+            em.persist(member);
+
+            em.flush();
+            em.clear();
+            System.out.println("============== START =============");
+            Member findMember = em.find(Member.class, member.getId());
+            Address a = findMember.getHomeAddress();
+            findMember.setHomeAddress(new Address("newCity",a.getStreet(),a.getZipcode()));
+
+            findMember.getFavoriteFoods().remove("치킨");
+            findMember.getFavoriteFoods().add("한식");
+
+            findMember.getAddressHistory().remove(new Address("old1", "street", "10000"));
+            findMember.getAddressHistory().add(new Address("newCity1", "street", "10000"));
 
 
             tx.commit();
@@ -189,15 +288,15 @@ public class JpaMain {
         System.out.println("m1 == m2: "+(m2 instanceof Member));
     }
 
-    private static void printMember(Member member) {
-        System.out.println(member.getUsername());
-
-    }
-
-    private static void printMemberAndTeam(Member member) {
-        String username = member.getUsername();
-        System.out.println("username = " + username);
-        Team team = member.getTeam();
-        System.out.println("team = " + team.getName());
-    }
+//    private static void printMember(Member member) {
+//        System.out.println(member.getUsername());
+//
+//    }
+//
+//    private static void printMemberAndTeam(Member member) {
+//        String username = member.getUsername();
+//        System.out.println("username = " + username);
+//        Team team = member.getTeam();
+//        System.out.println("team = " + team.getName());
+//    }
 }
