@@ -24,6 +24,6 @@ public class TPC39 {
         int va1 = Integer.parseInt(x);
         int va2 = Integer.parseInt(y);
         System.out.println(va1+va2);
-        
+
     }
 }
