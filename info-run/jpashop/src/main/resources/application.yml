@@ -10,9 +10,10 @@ spring:
 
   jpa:
     hibernate:
-      ddl-auto: none
+      ddl-auto: create
     properties:
       hibernate:
+        default_batch_fetch_size: 100
 #        show_sql: true
         format_sql: true
     database: H2
