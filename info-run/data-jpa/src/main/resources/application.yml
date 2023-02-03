@@ -1,11 +1,8 @@
-server:
-  port: 9090
-
 spring:
   datasource:
-    url: jdbc:h2:tcp://localhost/~/jpashop
+    url: jdbc:h2:tcp://localhost/~/datajpa
     username: sa
-    password:
+    password: 1
     driver-class-name: org.h2.Driver
 
   jpa:
@@ -13,11 +10,9 @@ spring:
       ddl-auto: create
     properties:
       hibernate:
-        default_batch_fetch_size: 100
-#        show_sql: true
+        #        show_sql: true
         format_sql: true
     database: H2
-    open-in-view: false
 logging:
   level:
     org.hibernate.SQL: debug
