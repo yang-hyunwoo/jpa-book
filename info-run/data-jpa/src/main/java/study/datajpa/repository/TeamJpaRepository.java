@@ -24,7 +24,7 @@ public class TeamJpaRepository {
     }
 
     public List<Team> findAll() {
-        return em.createQuery("select m from Team t", Team.class).getResultList();
+        return em.createQuery("select t from Team t", Team.class).getResultList();
     }
 
     public Optional<Team> findById(Long id) {
